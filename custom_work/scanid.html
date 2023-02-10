@@ -1,0 +1,160 @@
+ <html>
+
+ <head>
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+      <meta charset="utf-8">
+      <title>Webslesson Tutorial</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ </head>
+
+ <body>
+      <div class="container">
+           <br />
+           <h2 align="center">Auto Save Data using Ajax, Jquery, PHP and Mysql</h2>
+           <br />
+           <div class="main-container" id="container">
+
+               <div class="overlay"></div>
+               <div class="search-overlay"></div>
+      
+               <!--  BEGIN SIDEBAR  -->
+               <div class="sidebar-wrapper sidebar-theme">
+      
+                   <nav id="sidebar">
+                       <div class="shadow-bottom"></div>
+      
+                       <ul class="list-unstyled menu-categories" id="accordionExample">
+      
+      
+                           <li class="menu">
+                               <a href="file_upload.php" aria-expanded="false" class="dropdown-toggle">
+                                   <div class="">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target">
+                                           <circle cx="12" cy="12" r="10"></circle>
+                                           <circle cx="12" cy="12" r="6"></circle>
+                                           <circle cx="12" cy="12" r="2"></circle>
+                                       </svg>
+                                       <span>File Upload</span>
+                                   </div>
+                               </a>
+                           </li>
+      
+                       </ul>
+      
+                   </nav>
+      
+               </div>
+               <!--  END SIDEBAR  -->
+      
+               <!--  BEGIN CONTENT AREA  -->
+               <div id="content" class="main-content">
+                   <div class="pl-2 pr-2 pb-2">
+      
+                       <form method="post" id="insert_form" enctype="multipart/form-data">
+      
+                           <div class="row layout-top-spacing">
+      
+                               <div id="fuSingleFile" class="col-lg-12 layout-spacing">
+                                   <div class="statbox widget box box-shadow">
+                                       <div class="widget-header">
+                                           <div class="row">
+                                               <div class="col-xl-12 col-md-12 col-sm-12 col-12 p-4">
+                                                   <div class="row">
+      
+                                                                                                      <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                  <label for="inputPassword4">Name:</label>
+                                                                  <input type="text" class="form-control" id="names">
+                                                              </div>
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                  <label for="inputPassword4">Date of Birth:</label>
+                                                                  <input type="text" class="form-control" id="dob">
+                                                              </div>
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                  <label for="inputPassword4">ID No:</label>
+                                                                  <input type="text" class="form-control" id="idno">
+                                                              </div>
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                  <label for="inputPassword4">Issued:</label>
+                                                                  <input type="text" class="form-control" id="issued">
+                                                              </div>
+                                                      </div>  
+                                                      <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                  <label for="inputPassword4">Expires:</label>
+                                                                  <input type="text" class="form-control" id="exp">
+                                                              </div>
+                                                      </div>  
+                                                       <div class="col-md-8" id="form">
+      
+                                                       </div>
+      
+                                                       <div class="col-md-8" id="result">
+      
+                                                       </div>
+      
+      
+      
+      
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="widget-content widget-content-area">
+                                       
+      <button id="start-camera" class="btn btn-primary">Start Camera</button> 
+      <button id="click-photo" class="btn btn-primary">Click Photo</button>
+      <canvas id="canvas"  onchange="proccess(window.lastFile=this.files[0])" `width="320" height="240"></canvas> 
+      <br>   
+                                       <div class="row">
+                                               
+                                           <div class="col-xl-6 col-md-6 col-sm-12 col-12">
+                                                   <h4>Upload Files</h4>
+                                               </div>
+      
+                                               <div class="col-xl-6 col-md-6 col-sm-12 col-12">
+      
+                                                   <!-- <button name="insert" id="insert" type="submit"
+                                                 class="btn btn-primary mb-2 float-right">Save</button> -->
+                                                   <input type="submit" class="btn btn-primary" name="insert" id="insert" value="Save" style="float:right" />
+                                               </div>
+                                           </div>
+                                           
+                                           <div class="custom-file-container" data-upload-id="myFirstImage">
+                                               <label>Upload (Single File) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                               <label class="custom-file-container__custom-file">
+                                                   <input type="file" id="image" name="v_image" onchange="proccess(window.lastFile=this.files[0])" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                                                   <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+      
+                                                   <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                               </label>
+                                               <div class="custom-file-container__image-preview" width="5000" height="5000">
+                                               </div>
+       
+                                              </div>
+      
+      
+                                       </div>
+                                   </div>
+                               </div>
+      
+                           </div>
+                       </form>
+      
+      
+      
+                   </div>
+      
+      </div>
+ </body>
+
+ </html>
+  
